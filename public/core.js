@@ -32,10 +32,13 @@ $(function(){
 
                     msg = response.message;
                 } catch (ex) {
-                    msg = "Koneksi terputus. Coba segarkan halaman!";
+                    msg = "Koneksi terputus, coba segarkan halaman!";
                 }
 
-                $('#danger .msg').text(msg);
+                $('input').val('');
+                $('#failed .msg').text(msg);
+                $('#failed').removeClass('d-none');
+                $('#form').addClass('d-none');
             }
         });
     }
