@@ -37,7 +37,7 @@ class CoreController extends Controller
     private function protectRequest(string $key, int $limit)
     {
         if (RateLimiter::tooManyAttempts($key, $limit)) {
-            abort(400, sprintf('Terlalu banyak permintaan, tunggu %s detik lagi.', RateLimiter::availableIn($key)));
+            abort(400, sprintf('Terlalu banyak kesalahan, tunggu %s detik lagi.', RateLimiter::availableIn($key)));
         }
 
         RateLimiter::increment($key);
