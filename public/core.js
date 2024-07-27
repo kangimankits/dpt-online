@@ -21,7 +21,9 @@ $(function(){
             processData: false,
             contentType: false,
             success: function (callback) {
+                $('input').val('');
                 btn.prop("disabled", false);
+                fall.sukses.call(this, callback);
             },
             error: function (callback){
                 btn.prop("disabled", false);

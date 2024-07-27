@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,4 +14,16 @@ class Pemilih extends Model
     protected $primaryKey = 'nik';
     public $incrementing = false;
     public $timestamps = false;
+
+    private $palceholder = '************';
+
+    protected function nik(): Attribute
+    {
+        return Attribute::get(fn($val) => substr($val, 0, 4).$this->palceholder);
+    }
+
+    protected function nkk(): Attribute
+    {
+        return Attribute::get(fn($val) => substr($val, 0, 4).$this->palceholder);
+    }
 }
