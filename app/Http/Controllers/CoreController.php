@@ -24,12 +24,15 @@ class CoreController extends Controller
 
     private function search(Request $request)
     {
+        $this->protectRequest($a = 'search:'.$request->ip(), 5);
+        $this->protectRequest($b = 'search-global', 120);
+
         if($data = Pemilih::find($request->key)){
+            RateLimiter::clear($a);
+            RateLimiter::clear($b);
+
             return $data;
         }
-
-        $this->protectRequest('search:'.$request->ip(), 5);
-        $this->protectRequest('search-global', 120);
 
         throw new ModelNotFoundException();
     }
