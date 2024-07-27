@@ -15,15 +15,15 @@ class Pemilih extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    private $palceholder = '**********';
+    private $placeholder = '**********';
 
     protected function nik(): Attribute
     {
-        return Attribute::get(fn($val) => substr($val, 0, 6).$this->palceholder);
+        return Attribute::get(fn($val) => substr($val, 0, 6).$this->placeholder);
     }
 
     protected function nkk(): Attribute
     {
-        return Attribute::get(fn($val) => substr($val, 0, 6).$this->palceholder);
+        return Attribute::get(fn($val) => substr($val, 0, 6).$this->placeholder);
     }
 }
