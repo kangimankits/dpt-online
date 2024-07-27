@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemilih;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,10 +24,14 @@ class CoreController extends Controller
 
     private function search(Request $request)
     {
+        if($data = Pemilih::find($request->key)){
+            return $data;
+        }
+
         $this->protectRequest('search:'.$request->ip(), 5);
         $this->protectRequest('search-global', 120);
 
-        return Pemilih::findOrFail($request->key);
+        throw new ModelNotFoundException();
     }
 
     private function protectRequest(string $key, int $limit)
